@@ -12,7 +12,20 @@
 <body>
     <!-- Шапка сайта -->
     <header class="header">
-        <a class = "header__logo" href="/">Логотип или название сайта</a>
+    <a class="header__logo" href="/">
+        <img 
+            srcset="img/logo-128.jpg 128w,
+                    img/logo-256.jpg 256w,
+                    img/logo-512.jpg 512w"
+            sizes="(max-width: 512px) 512px,
+                (max-width: 512px) 512px,
+                512px"
+            src="img/logo-medium.jpg"
+            alt="Название вашего сайта"
+            loading="lazy"
+            width="128"
+            height="128">
+    </a>     
         <!-- Главное меню навигации -->
         <nav class="nav">
             <ul class="nav__list">
@@ -20,35 +33,101 @@
                     <a class="nav__link" href="index.html"> Главная </a>
                 </li>
                 <li class="nav__item">
-                    <a class="nav__link" href="about.html"> О нас </a>
+                    <a class="nav__link" href="index.html#services"> Услуги </a>
                 </li>
                 <li class="nav__item">
-                    <a class="nav__link" href="contacts.html"> Контакты </a>
+                    <a class="nav__link" href="index.html#portfolio"> Портфолио </a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="index.html#contacts"> Контакты </a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="about.html"> О нас </a>
                 </li>
             </ul>
         </nav>
     </header>
 
     <!-- Уникальное основное содержимое страницы -->
-    <main>
-        <h1>Добро пожаловать на наш сайт!</h1>
+    <main class="forPadding">
+        <section class="hero">
+            <div class="hero__content">
+                <h1>Добро пожаловать на наш сайт!</h1>
+                <p> Современно, модно, молодежно </p>
+            </div>
+        </section>
+
+        <section class="responsive-image-section">
+                <h2>  </h2>
+        </section>
 
         <!-- Секция 1 с якорем -->
         <section id="services">
             <h2>Наши услуги</h2>
-            <p>Описание предоставляемых услуг...</p>
+            <p>Мы предлагаем полный цикл разработки веб-проектов любой сложности</p>
+            
+            <h3>Веб-разработка</h3>
+            <ul>
+                <li>Создание сайтов-визиток и лендингов</li>
+                <li>Корпоративные сайты и порталы</li>
+                <li>Интернет-магазины и каталоги продукции</li>
+                <li>Веб-приложения и SaaS-платформы</li>
+            </ul>
+
+            <h3>Дизайн и UX/UI</h3>
+            <ul>
+                <li>Разработка уникального дизайна</li>
+                <li>Создание пользовательских интерфейсов</li>
+                <li>Прототипирование и проектирование</li>
+                <li>Адаптация под мобильные устройства</li>
+            </ul>
+
+            <h3>Техническая поддержка</h3>
+            <ul>
+                <li>Обслуживание и хостинг сайтов</li>
+                <li>Технический аудит и оптимизация</li>
+                <li>Доработка существующих проектов</li>
+                <li>Консультации и обучение</li>
+            </ul>
         </section>
 
         <!-- Секция 2 с якорем -->
         <section id="portfolio">
             <h2>Портфолио</h2>
-            <p>Примеры наших работ...</p>
+            <p>Вот некоторые из наших последних проектов:</p>
+
+            <article>
+                <h3>Интернет-магазин "ModaStyle"</h3>
+                <p>Полностью функциональный интернет-магазин одежды с системой управления товарами, корзиной покупок и интеграцией с платежными системами.</p>
+                <p><strong>Технологии:</strong> React, Node.js, MongoDB, Stripe</p>
+            </article>
+
+            <article>
+                <h3>Корпоративный портал "TechSolutions"</h3>
+                <p>Комплексная система для управления внутренними процессами компании, включая CRM, управление проектами и аналитику.</p>
+                <p><strong>Технологии:</strong> Vue.js, Laravel, MySQL, Redis</p>
+            </article>
+
+            <!-- Вставка с VK Видео; проверьте, разрешён ли embed для ролика -->
+            <div class="media">
+            <iframe
+            src="https://vk.com/video_ext.php?oid=XXXX&id=YYYY&hash=ZZZZ"
+            title="Видео о проекте"
+            allow="autoplay; encrypted-media; picture-in-picture; web-share"
+            allowfullscreen loading="lazy"></iframe>
+            </div>
         </section>
 
         <!-- Секция 3 с якорем -->
         <section id="contacts">
             <h2>Контактная информация</h2>
-            <p>Наши контакты...</p>
+                        <div class="contact-info">
+                <h3>Наши контакты</h3>
+                <p><strong>Адрес:</strong> г. Курск, пр. В. Клыкова, д. 322</p>
+                <p><strong>Телефон:</strong> +7 (466) 466-46-46</p>
+                <p><strong>Email:</strong> kursk@studio.ru</p>
+            </div>
+
             <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
         </section>
     </main>
@@ -57,46 +136,44 @@
 <button id="openDialog" type="button">Написать нам</button>
 
 <!-- Модалка с формой -->
-<dialog id="contactDialog" aria-labelledby="dialogTitle">
-     <h2 id="dialogTitle">Обратная связь</h2>
-     <form id="contactForm" method="dialog" novalidate>
-     <label for="name">Имя</label>
-     <input id="name" name="name" type="text" required minlength="2" autocomplete="given-name">
-     <label for="email">E-mail</label>
-     <input id="email" name="email" type="email" required autocomplete="email">
-     <label for="phone">Телефон</label>
-     <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
-     <small id="phoneHelp">Формат: +7 (900) 000-00-00</small>
-    <label for="date">Дата</label>
-     <input id="date" name="date" type="date">
-     <label for="topic">Тема</label>
-     <select id="topic" name="topic" required>
+<dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
+     <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
+     <form id="contactForm" class="modal__contact" method="dialog" novalidate>
+     <label for="name" class="modal__label">Имя</label>
+     <input id="name" class="modal__input" name="name" type="text" required minlength="2" autocomplete="given-name">
+     <label for="email" class="modal__label">E-mail</label>
+     <input id="email" class="modal__input" name="email" type="email" required autocomplete="email">
+     <label for="phone" class="modal__label">Телефон</label>
+     <input id="phone" class="modal__input" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
+     <small id="phoneHelp" class="modal__label">Формат: +7 (900) 000-00-00</small>
+    <label for="date" class="modal__label">Дата</label>
+     <input id="date" class="modal__input" name="date" type="date">
+     <label for="topic" class="modal__label">Тема</label>
+     <select id="topic" class="modal__select" name="topic" required>
         <option value="">Выберите тему</option>
          <option>Вопрос</option>
         <option>Заказ</option>
      </select>
-     <label for="message">Сообщение</label>
-     <textarea id="message" name="message" rows="4" required></textarea>
+     <label for="message" class="modal__label">Сообщение</label>
+     <textarea id="message" class="modal__textarea" name="message" rows="4" required></textarea>
      <div class="form-actions">
-    <button type="button" id="closeDialog">Закрыть</button>
-     <button type="submit">Отправить</button>
- </div>
+        <button type="button" class="modal__button" id="closeDialog">Закрыть</button>
+        <button type="submit" class="modal__button">Отправить</button>
+     </div>
  </form>
 </dialog>
 
-<dialog id="successDialog" aria-labelledby="successTitle">
-    <div class="succeыs-content">
-        <h2>
-            Успешно!
-        </h2>
-        <button type="button" id="closeSuccessDialog"> Закрыть </button>
+<dialog id="successDialog" class="modal" aria-labelledby="successTitle">
+    <div class="modal__content">
+        <h2 id="successTitle" class="modal__title">Успешно!</h2>
+        <button type="button" class="modal__button" id="closeSuccessDialog"> Закрыть </button>
     </div>
 </dialog>
 
     <!-- Подвал сайта -->
     <footer>
-        <p>&copy; 2023 Название вашего сайта. Все права защищены.</p>
-        <p>Телефон: +7 (123) 456-78-90</p>
+        <p>&copy; 2077 Название сайта. Все права защищены.</p>
+        <p>Телефон: +7 (466) 466-46-46</p>
     </footer>
 </body>
 </html>

@@ -31,7 +31,7 @@ form?.addEventListener('submit', (e) => {
         form.reportValidity(); // показать браузерные подсказки
         // A11y: подсветка проблемных полей
         [...form.elements].forEach(el => {
-        if (el.willValidate) el.toggleAttribute('aria-invalid',
+        if (el.willValidate) el.setAttribute('aria-invalid',
             !el.checkValidity());
         });
         return;
