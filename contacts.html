@@ -25,8 +25,12 @@
                 <li class="nav__item">
                     <a class="nav__link" href="contacts.html"> Контакты </a>
                 </li>
+                <li>  <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+                </li>
             </ul>
+
         </nav>
+
     </header>
 
     <main class="forPadding">
@@ -39,7 +43,9 @@
         </nav>
 
         <h1 class="contacts__text"> Контакты 
-            <p class="phone__number">+7 (777) 777-77-77</p>
+            <ul>
+                            <li class="phone__number">+7 (777) 777-77-77</li>
+            </ul>
         </h1>
     </main>
 
@@ -49,3 +55,20 @@
     </footer>
 </body>
 </html>
+
+<script defer>
+ const KEY='theme', btn=document.querySelector('.theme-toggle');
+ const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+ // Автовыбор: системная тема или сохранённый выбор пользователя
+ if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+prefersDark)){
+ document.body.classList.add('theme-dark');
+ btn?.setAttribute('aria-pressed','true');
+ }
+ // Переключение по кнопке с сохранением в localStorage
+ btn?.addEventListener('click', ()=>{
+ const isDark=document.body.classList.toggle('theme-dark');
+ btn.setAttribute('aria-pressed', String(isDark));
+ localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+ });
+</script>

@@ -26,6 +26,8 @@
                 <li class="nav__item">
                     <a class="nav__link" href="contacts.html"> Контакты </a>
                 </li>
+                <li>  <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -42,11 +44,15 @@
         <h1>О нашей компании</h1>
         <section>
             <h2>Наша история</h2>
-            <p>Текст о том, как все начиналось...</p>
+            <ul>
+            <li>Текст о том, как все начиналось...</li>
+            </ul>
         </section>
         <section>
             <h2>Наша команда</h2>
-            <p>Текст о команде...</p>
+            <ul>
+                <li>Текст о команде...</li>
+            </ul>
         </section>
     </main>
 
@@ -56,3 +62,20 @@
     </footer>
 </body>
 </html>
+
+<script defer>
+ const KEY='theme', btn=document.querySelector('.theme-toggle');
+ const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+ // Автовыбор: системная тема или сохранённый выбор пользователя
+ if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+prefersDark)){
+ document.body.classList.add('theme-dark');
+ btn?.setAttribute('aria-pressed','true');
+ }
+ // Переключение по кнопке с сохранением в localStorage
+ btn?.addEventListener('click', ()=>{
+ const isDark=document.body.classList.toggle('theme-dark');
+ btn.setAttribute('aria-pressed', String(isDark));
+ localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+ });
+</script>

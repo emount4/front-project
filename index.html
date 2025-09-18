@@ -12,20 +12,8 @@
 <body>
     <!-- Шапка сайта -->
     <header class="header">
-    <a class="header__logo" href="/">
-        <img 
-            srcset="img/logo-128.jpg 128w,
-                    img/logo-256.jpg 256w,
-                    img/logo-512.jpg 512w"
-            sizes="(max-width: 512px) 512px,
-                (max-width: 512px) 512px,
-                512px"
-            src="img/logo-medium.jpg"
-            alt="Название вашего сайта"
-            loading="lazy"
-            width="128"
-            height="128">
-    </a>     
+          <a class = "header__logo" href="/">Логотип или название сайта</a>
+
         <!-- Главное меню навигации -->
         <nav class="nav">
             <ul class="nav__list">
@@ -44,9 +32,32 @@
                 <li class="nav__item">
                     <a class="nav__link" href="about.html"> О нас </a>
                 </li>
+                <li>  <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+                </li>
             </ul>
+
         </nav>
+
     </header>
+
+
+<script defer>
+ const KEY='theme', btn=document.querySelector('.theme-toggle');
+ const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+ // Автовыбор: системная тема или сохранённый выбор пользователя
+ if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+prefersDark)){
+ document.body.classList.add('theme-dark');
+ btn?.setAttribute('aria-pressed','true');
+ }
+ // Переключение по кнопке с сохранением в localStorage
+ btn?.addEventListener('click', ()=>{
+ const isDark=document.body.classList.toggle('theme-dark');
+ btn.setAttribute('aria-pressed', String(isDark));
+ localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+ });
+</script>
+
 
     <!-- Уникальное основное содержимое страницы -->
     <main class="forPadding">
@@ -62,7 +73,7 @@
         </section>
 
         <!-- Секция 1 с якорем -->
-        <section id="services">
+        <section id="services">  
             <h2>Наши услуги</h2>
             <p>Мы предлагаем полный цикл разработки веб-проектов любой сложности</p>
             
@@ -108,14 +119,17 @@
                 <p><strong>Технологии:</strong> Vue.js, Laravel, MySQL, Redis</p>
             </article>
 
-            <!-- Вставка с VK Видео; проверьте, разрешён ли embed для ролика -->
-            <div class="media">
-            <iframe
-            src="https://vk.com/video_ext.php?oid=XXXX&id=YYYY&hash=ZZZZ"
-            title="Видео о проекте"
-            allow="autoplay; encrypted-media; picture-in-picture; web-share"
-            allowfullscreen loading="lazy"></iframe>
-            </div>
+           
+        <div class="media">
+        <iframe
+        src="https://rutube.ru/play/embed/f3b615db135287a64584737e664e1e4b/"
+        title="Видео о проекте" 
+        allow="autoplay; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen loading="lazy"
+        style="width: 100%; max-width: 800px; height: 450px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);"></iframe>
+
+    </iframe>
+        </div>
         </section>
 
         <!-- Секция 3 с якорем -->
@@ -126,14 +140,15 @@
                 <p><strong>Адрес:</strong> г. Курск, пр. В. Клыкова, д. 322</p>
                 <p><strong>Телефон:</strong> +7 (466) 466-46-46</p>
                 <p><strong>Email:</strong> kursk@studio.ru</p>
+                <button id="openDialog" type="button" class="openDialog__button">Написать нам</button>
+
             </div>
 
             <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
+
         </section>
     </main>
 
-<!-- Кнопка открытия модалки -->
-<button id="openDialog" type="button">Написать нам</button>
 
 <!-- Модалка с формой -->
 <dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
@@ -169,6 +184,19 @@
         <button type="button" class="modal__button" id="closeSuccessDialog"> Закрыть </button>
     </div>
 </dialog>
+                <a class="header__logo" href="/">
+        <img 
+            srcset="img/logo-128.jpg 128w,
+                    img/logo-256.jpg 256w,
+                    img/logo-512.jpg 512w"
+            sizes="(max-width: 512px) 512px,
+                (max-width: 512px) 512px,
+                512px"
+            src="img/logo-medium.jpg"
+            alt="Название вашего сайта"
+            loading="lazy"
+>
+    </a> 
 
     <!-- Подвал сайта -->
     <footer>
