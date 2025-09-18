@@ -11,32 +11,48 @@
     <meta name="description" content="Узнайте больше о нашей компании и истории">
 </head>
 <body>
-    <header>
-        <a href="/">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>    </header>
 
-    <main>
+    <header class="header">
+        <a class = "header__logo" href="/">Логотип или название сайта</a>
+        <!-- Главное меню навигации -->
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="index.html"> Главная </a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="about.html"> О нас </a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="contacts.html"> Контакты </a>
+                </li>
+                <li>  <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="forPadding">
         <!-- Простые "хлебные крошки" -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>О нас</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a class="breadcrumbs__link" href="index.html">
+                Главная
+            </a> →
+            <span class="breadcrumbs__text">О нас</span>
         </nav>
 
         <h1>О нашей компании</h1>
         <section>
             <h2>Наша история</h2>
-            <p>Текст о том, как все начиналось...</p>
+            <ul>
+            <li>Текст о том, как все начиналось...</li>
+            </ul>
         </section>
         <section>
             <h2>Наша команда</h2>
-            <p>Текст о команде...</p>
+            <ul>
+                <li>Текст о команде...</li>
+            </ul>
         </section>
     </main>
 
@@ -46,3 +62,20 @@
     </footer>
 </body>
 </html>
+
+<script defer>
+ const KEY='theme', btn=document.querySelector('.theme-toggle');
+ const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+ // Автовыбор: системная тема или сохранённый выбор пользователя
+ if(localStorage.getItem(KEY)==='dark' || (!localStorage.getItem(KEY) &&
+prefersDark)){
+ document.body.classList.add('theme-dark');
+ btn?.setAttribute('aria-pressed','true');
+ }
+ // Переключение по кнопке с сохранением в localStorage
+ btn?.addEventListener('click', ()=>{
+ const isDark=document.body.classList.toggle('theme-dark');
+ btn.setAttribute('aria-pressed', String(isDark));
+ localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+ });
+</script>

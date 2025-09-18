@@ -1,3 +1,161 @@
+/* Reset-минимум — подробнее в 1.8 */
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+ background:var(--color-bg);
+ color:var(--color-fg);
+ font-family:var(--font-body);
+ line-height:1.5;
+}
+
+
+
+:root{
+ /* Палитра */
+ --color-bg:#fff; --color-fg:#0b0b0b; --color-muted:#666;
+ --color-primary:#0a84ff; --color-danger:#b00020;
+ /* Типографика и размеры */
+ --font-body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+ --space-1:4px; --space-2:8px; --space-3:16px; --space-4:24px; --space5:40px;
+ /* Скругления и тени */
+ --radius:12px;
+ --shadow:0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.08);
+}
+
+/* Тёмная тема: переопределяем только значения токенов */
+body.theme-dark{
+ --color-bg:#0b0b0b; --color-fg:#f5f5f5; --color-muted:#aaa;
+ --color-primary:#6aa2ff;
+}
+
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+:target{
+  outline: 2px dashed var(--color-primary);
+  outline-offset: var(--space-1);
+  border-radius: var(--radius);
+}
+
+/* Центровка и ограничение ширины контейнера */
+.container{ width:min(100% - 2*var(--space-4), 1120px); margin-inline:auto; }
+/* Вертикальные отступы секций по токенам */
+.section{ padding-block:var(--space-5); }
+.section__title{ margin:0 0 var(--space-3); }
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-muted);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.header__logo:hover{
+  opacity: 0.8;
+}
+
+.hero{
+ background:
+ linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.15)), /* оверлей для
+контраста текста */
+ url("img/logo-medium.jpg") center/cover no-repeat; /* картинка
+как декор */
+ color:#fff;
+ padding: clamp(2rem, 6vw, 6rem) 1rem; /* адаптивные
+отступы */
+ border-radius:var(--radius);
+}
+
+/* Навигация */
+
+.nav__list{
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-3);
+}
+
+.nav__link{
+  color: var(--color-fg);
+  text-decoration: none;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  transition: all 0.2 ease;
+  position: relative;
+}
+
+.nav__link, .nav__link:visited{
+  color: var(--color-fg);
+}
+
+.nav__link:hover{
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  transform: translateY(-1px);
+}
+
+.nav__link:active{
+  transform: translateY(0);
+}
+
+.nav__link:focus-visible{
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  background-color: transparent;
+}
+
+/* Хлебные крошки */
+
+.breadcrumbs{
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.breadcrumbs__link{
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs__link:hover{
+  color: var(--color-fg);
+  text-decoration: underline;
+}
+
+.breadcrumbs__link:focus-visible{
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
+
+.breadcrumbs__text{
+  color: var(--color-muted);
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.breadcrumbs__text:hover{
+  color: var(--color-muted);
+  text-decoration: none;
+  cursor: default;
+}
+
 /* Диалоговое окно */
 dialog {
   padding: 1.25rem;
@@ -79,4 +237,79 @@ button:hover {
 /* Подсветка ошибочных полей (используй aria-invalid="true") */
 [aria-invalid="true"] {
   border-color: #b00020;
+}
+
+/* Модалка */
+
+.modal {
+  padding: var(--space-4);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  box-shadow: var(--shadow);
+  max-width: 500px;
+  width: 90vw;
+}
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__label{
+    font-weight: 600;
+    color: var(--color-fg);
+}
+
+.modal__input,
+.modal__select,
+.modal__textarea {
+    padding: var(--space-2);
+    border: 1px solid var(--color-muted);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+.modal__input:focus,
+.modal__select:focus,
+.modal__textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.modal__input[aria-invalid="true"],
+.modal__select[aria-invalid="true"],
+.modal__textarea[aria-invalid="true"] {
+    border-color: var(--color-danger);
+}
+
+.modal__button {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.forPadding{
+  padding: var(--space-2);
+}
+
+.modal__title {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.modal__content {
+    text-align: center;
+    padding: 2rem;
+}
+
+.theme-toggle{
+  width: 36px;
+  height: 36px;
+  padding: 0;
 }
